@@ -1,4 +1,4 @@
-package org.example.tkani.controller.rest;
+package org.example.tkani.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.tkani.service.FileService;

@@ -38,4 +38,9 @@ public class CategoryServiceImpl implements CategoryService {
     public Category findById(Long categoryId) {
         return categoryRepository.findById(categoryId).orElse(null);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        categoryRepository.deleteById(id);
+    }
 }

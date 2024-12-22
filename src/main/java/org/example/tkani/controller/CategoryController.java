@@ -1,4 +1,4 @@
-package org.example.tkani.controller.rest;
+package org.example.tkani.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.tkani.dto.CategoryCreateDto;
@@ -26,5 +26,11 @@ public class CategoryController {
     @GetMapping()
     public ResponseEntity<List<CategoryDto>> getCategories() {
         return ResponseEntity.ok(categoryService.getAll());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCategory(@PathVariable(name = "id") Long id) {
+        categoryService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }

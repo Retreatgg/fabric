@@ -1,7 +1,7 @@
 package org.example.tkani.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.example.tkani.dto.FabricCreateDto;
+import org.example.tkani.dto.FabricCreateAndUpdateDto;
 import org.example.tkani.dto.FabricDto;
 import org.example.tkani.mapper.FabricMapper;
 import org.example.tkani.model.Fabric;
@@ -26,15 +26,18 @@ public class FabricServiceImpl implements FabricService {
     private final FileService fileService;
 
     @Override
-    public FabricDto create(FabricCreateDto fabricCreateDto) {
-        Fabric fabric = buildFabric(fabricCreateDto);
+    public FabricDto create(FabricCreateAndUpdateDto fabricCreateAndUpdateDto) {
+        Fabric fabric = buildFabric(fabricCreateAndUpdateDto);
         fabricRepository.save(fabric);
         return fabricMapper.toDto(fabric);
     }
 
     @Override
     public List<FabricDto> getAll(Long categoryId) {
-        Specification<Fabric> spec = FabricSpecification.byCategoryId(categoryId);
+        Specification<Fabric> spec = FabricSpecification
+                .byCategoryId(categoryId)
+                .and(FabricSpecification.isEnabled(true));
+
         List<Fabric> fabrics = fabricRepository.findAll(spec);
         return fabricMapper.toListDto(fabrics);
     }
@@ -45,15 +48,30 @@ public class FabricServiceImpl implements FabricService {
         return fabricMapper.toDto(fabric);
     }
 
-    private Fabric buildFabric(FabricCreateDto fabricCreateDto) {
+    @Override
+    public void deleteById(Long id) {
+        Fabric fabric = fabricRepository.findById(id).orElseThrow();
+        fabric.setEnabled(false);
+        fabricRepository.save(fabric);
+    }
+
+    @Override
+    public FabricDto update(Long id, FabricCreateAndUpdateDto fabricCreateAndUpdateDto) {
+        Fabric fabric = buildFabric(fabricCreateAndUpdateDto);
+        fabric.setId(id);
+        fabricRepository.save(fabric);
+        return fabricMapper.toDto(fabric);
+    }
+
+    private Fabric buildFabric(FabricCreateAndUpdateDto fabricCreateAndUpdateDto) {
         return Fabric.builder()
-                .name(fabricCreateDto.getName())
-                .description(fabricCreateDto.getDescription())
-                .price(fabricCreateDto.getPrice())
+                .name(fabricCreateAndUpdateDto.getName())
+                .description(fabricCreateAndUpdateDto.getDescription())
+                .price(fabricCreateAndUpdateDto.getPrice())
                 .createdAt(Instant.now())
                 .enabled(true)
-                .image(fileService.saveUploadedFile(fabricCreateDto.getImage(), "/files"))
-                .category(categoryService.findById(fabricCreateDto.getCategoryId()))
+                .image(fileService.saveUploadedFile(fabricCreateAndUpdateDto.getImage(), "/files"))
+                .category(categoryService.findById(fabricCreateAndUpdateDto.getCategoryId()))
                 .build();
     }
 }

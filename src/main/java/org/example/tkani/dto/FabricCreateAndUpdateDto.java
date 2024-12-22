@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FabricCreateDto {
+public class FabricCreateAndUpdateDto {
 
     private String name;
     private String description;

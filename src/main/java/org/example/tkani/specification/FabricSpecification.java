@@ -11,4 +11,11 @@ public class FabricSpecification {
             return cb.equal(r.get("category").get("id"), categoryId);
         };
     }
+
+    public static Specification<Fabric> isEnabled(Boolean isEnabled) {
+        return (r, q, cb) -> {
+            if (isEnabled == null) return cb.conjunction();
+            return cb.equal(r.get("enabled"), isEnabled);
+        };
+    }
 }

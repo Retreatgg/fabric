@@ -11,5 +11,5 @@ public interface CategoryService {
     CategoryDto create(CategoryCreateDto categoryCreateDto);
     List<CategoryDto> getAll();
     Category findById(Long categoryId);
-
+    void deleteById(Long id);
 }
