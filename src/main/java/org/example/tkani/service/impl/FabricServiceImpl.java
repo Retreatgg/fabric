@@ -9,6 +9,7 @@ import org.example.tkani.repository.FabricRepository;
 import org.example.tkani.service.CategoryService;
 import org.example.tkani.service.FabricService;
 import org.example.tkani.service.FileService;
+import org.example.tkani.service.SubcategoryService;
 import org.example.tkani.specification.FabricSpecification;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FabricServiceImpl implements FabricService {
 
+    private final SubcategoryService subcategoryService;
     private final FabricRepository fabricRepository;
     private final CategoryService categoryService;
     private final FabricMapper fabricMapper;
@@ -33,9 +35,9 @@ public class FabricServiceImpl implements FabricService {
     }
 
     @Override
-    public List<FabricDto> getAll(Long categoryId) {
+    public List<FabricDto> getAll(Long subcategoryId) {
         Specification<Fabric> spec = FabricSpecification
-                .byCategoryId(categoryId)
+                .bySubcategoryId(subcategoryId)
                 .and(FabricSpecification.isEnabled(true));
 
         List<Fabric> fabrics = fabricRepository.findAll(spec);
@@ -71,7 +73,7 @@ public class FabricServiceImpl implements FabricService {
                 .createdAt(Instant.now())
                 .enabled(true)
                 .image(fileService.saveUploadedFile(fabricCreateAndUpdateDto.getImage(), "/files"))
-                .category(categoryService.findById(fabricCreateAndUpdateDto.getCategoryId()))
+                .subcategory(subcategoryService.findById(fabricCreateAndUpdateDto.getSubcategoryId()))
                 .build();
     }
 }

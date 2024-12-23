@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface FabricService {
     FabricDto create(@Valid FabricCreateAndUpdateDto fabricCreateAndUpdateDto);
-    List<FabricDto> getAll(Long categoryId);
+    List<FabricDto> getAll(Long subcategoryId);
     FabricDto getById(Long id);
     void deleteById(Long id);
     FabricDto update(Long id, @Valid FabricCreateAndUpdateDto fabricCreateAndUpdateDto);

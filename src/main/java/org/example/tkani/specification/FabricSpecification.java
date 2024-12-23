@@ -5,10 +5,10 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class FabricSpecification {
 
-    public static Specification<Fabric> byCategoryId(Long categoryId) {
+    public static Specification<Fabric> bySubcategoryId(Long subcategoryId) {
         return (r, q, cb) -> {
-            if (categoryId == 0) return cb.conjunction();
-            return cb.equal(r.get("category").get("id"), categoryId);
+            if (subcategoryId == 0) return cb.conjunction();
+            return cb.equal(r.get("subcategory").get("id"), subcategoryId);
         };
     }
 

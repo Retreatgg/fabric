@@ -3,6 +3,7 @@ package org.example.tkani.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.tkani.dto.CategoryCreateDto;
 import org.example.tkani.dto.CategoryDto;
+import org.example.tkani.dto.CategoryWithSubcategoriesDto;
 import org.example.tkani.service.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class CategoryController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<CategoryDto>> getCategories() {
+    public ResponseEntity<List<CategoryWithSubcategoriesDto>> getCategories() {
         return ResponseEntity.ok(categoryService.getAll());
     }
 

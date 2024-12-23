@@ -27,7 +27,4 @@ public class Category {
     @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @OneToMany(mappedBy = "category")
-    private Set<Fabric> fabrics = new LinkedHashSet<>();
-
 }

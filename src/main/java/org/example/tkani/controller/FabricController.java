@@ -26,9 +26,9 @@ public class FabricController {
 
     @GetMapping()
     public ResponseEntity<List<FabricDto>> getFabrics(
-            @RequestParam(name = "categoryId", defaultValue = "0") Long categoryId
+            @RequestParam(name = "subcategoryId", defaultValue = "0") Long subcategoryId
     ) {
-        return ResponseEntity.ok(fabricService.getAll(categoryId));
+        return ResponseEntity.ok(fabricService.getAll(subcategoryId));
     }
 
     @GetMapping("/{id}")

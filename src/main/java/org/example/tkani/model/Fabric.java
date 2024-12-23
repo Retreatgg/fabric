@@ -35,11 +35,6 @@ public class Fabric {
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
-
     @Size(max = 300)
     @NotNull
     @Column(name = "image", nullable = false, length = 300)
@@ -52,5 +47,10 @@ public class Fabric {
     @NotNull
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "subcategory_id", nullable = false)
+    private Subcategory subcategory;
 
 }
