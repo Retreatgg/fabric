@@ -15,5 +15,6 @@ public class FabricCreateAndUpdateDto {
     private Double price;
     private MultipartFile image;
     private Long subcategoryId;
+    private Long badgeId;
 
 }

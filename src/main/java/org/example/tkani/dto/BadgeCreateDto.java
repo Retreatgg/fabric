@@ -7,13 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FabricDto {
+public class BadgeCreateDto {
 
-    private Long id;
     private String name;
-    private String description;
-    private String price;
-    private String imageUrl;
-    private BadgeDto badge;
+    private String textColor;
+    private String backgroundColor;
 
 }

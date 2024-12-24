@@ -53,4 +53,8 @@ public class Fabric {
     @JoinColumn(name = "subcategory_id", nullable = false)
     private Subcategory subcategory;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "badge_id", nullable = false)
+    private Badge badge;
+
 }

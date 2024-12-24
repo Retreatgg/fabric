@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: create table for badges
+      author: Argen
+      changes:
+        - createTable:
+            tableName: badges
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(150)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text_color
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: background_color
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: add badges for fabrics
+      author: Argen
+      changes:
+        - addColumn:
+            tableName: fabrics
+            columns:
+              - column:
+                  name: badge_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_fabric_badge_id
+                    references: badges(id)
+

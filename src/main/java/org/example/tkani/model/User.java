@@ -31,6 +31,9 @@ public class User {
     @Column(name = "password", nullable = false, length = 260)
     private String password;
 
+    @Column(name = "token", nullable = false, length = 260)
+    private String token;
+
     @ColumnDefault("true")
     @Column(name = "enabled")
     private Boolean enabled;

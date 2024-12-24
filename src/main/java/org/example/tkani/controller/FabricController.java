@@ -5,10 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.tkani.dto.FabricCreateAndUpdateDto;
 import org.example.tkani.dto.FabricDto;
 import org.example.tkani.service.FabricService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/fabrics")
@@ -25,10 +24,14 @@ public class FabricController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<FabricDto>> getFabrics(
-            @RequestParam(name = "subcategoryId", defaultValue = "0") Long subcategoryId
+    public ResponseEntity<Page<FabricDto>> getFabrics(
+            @RequestParam(name = "subcategoryId", defaultValue = "0") Long subcategoryId,
+            @RequestParam(name = "categoryId", defaultValue = "0") Long categoryId,
+            @RequestParam(name = "page", defaultValue = "0") Integer page,
+            @RequestParam(name = "size", defaultValue = "10") Integer size,
+            @RequestParam(name = "search", required = false) String search
     ) {
-        return ResponseEntity.ok(fabricService.getAll(subcategoryId));
+        return ResponseEntity.ok(fabricService.getAll(subcategoryId, page, size, search, categoryId));
     }
 
     @GetMapping("/{id}")
